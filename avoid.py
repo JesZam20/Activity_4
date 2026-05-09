@@ -48,7 +48,7 @@ def move():
     for bomb, speed in zip(bombs, speeds):
         bomb.move(speed)
 
-    if randrange(10) == 0:
+    if randrange(5) == 0:
         speed = choice(options).copy()
         offset = randrange(-199, 200)
 
