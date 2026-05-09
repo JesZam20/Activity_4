@@ -1,7 +1,7 @@
-#Avoid, classic arcade game.
+# Avoid, classic arcade game.
 
-from random import *
-from turtle import *
+import random
+import turtle
 
 from freegames import vector
 
@@ -10,47 +10,45 @@ east, west = vector(4, 0), vector(-4, 0)
 options = north, south, east, west
 
 player = vector(0, 0)
-aim = choice(options).copy()
+aim = random.choice(options).copy()
 bombs = []
 speeds = []
-score = 0 #Add variable to store the score
-
+score = 0  # Add variable to store the score
 
 def inside(point):
     """Return True if point on screen."""
     return -300 < point.x < 300 and -200 < point.y < 200
 
-
 def draw(alive):
     """Draw screen objects."""
-    clear()
+    turtle.clear()
 
-    #Show score at the upper right corner
-    goto(80, 160) #Position of the text
-    write(f'Score: {score:.2f}', font=('Arial', 16, 'normal')) #Display the score
+    """Show score at the upper right corner"""
+    turtle.goto(170, 160)  # Position of the text
+    """Display the score"""
+    turtle.write(f'Score: {score:.2f}', font=('Arial', 16, 'normal'))
 
-    goto(player.x, player.y)
+    turtle.goto(player.x, player.y)
     color = 'blue' if alive else 'red'
-    dot(10, color)
+    turtle.dot(10, color)
     for bomb in bombs:
-        goto(bomb.x, bomb.y)
-        dot(20, 'black')
-    update()
-
+        turtle.goto(bomb.x, bomb.y)
+        turtle.dot(20, 'black')
+    turtle.update()
 
 def move():
     """Update player and bomb positions."""
-    global score #Indicate that the global variable score is used
-    score += 0.05   #Update the score every frame
+    global score  # Indicate that the global variable score is used
+    score += 0.05  # Update the score every frame
 
     player.move(aim)
 
     for bomb, speed in zip(bombs, speeds):
         bomb.move(speed)
 
-    if randrange(5) == 0:
-        speed = choice(options).copy()
-        offset = randrange(-199, 200)
+    if random.randrange(5) == 0:
+        speed = random.choice(options).copy()
+        offset = random.randrange(-199, 200)
 
         if speed == north:
             bomb = vector(offset, -199)
@@ -80,17 +78,16 @@ def move():
             return
 
     draw(True)
-    ontimer(move, 50)
+    turtle.ontimer(move, 50)
 
-
-setup(620, 420, 370, 0)
-hideturtle()
-up()
-tracer(False)
-listen()
-onkey(lambda: aim.set(north), 'Up')
-onkey(lambda: aim.set(south), 'Down')
-onkey(lambda: aim.set(east), 'Right')
-onkey(lambda: aim.set(west), 'Left')
+turtle.setup(620, 420, 370, 0)
+turtle.hideturtle()
+turtle.up()
+turtle.tracer(False)
+turtle.listen()
+turtle.onkey(lambda: aim.set(north), 'Up')
+turtle.onkey(lambda: aim.set(south), 'Down')
+turtle.onkey(lambda: aim.set(east), 'Right')
+turtle.onkey(lambda: aim.set(west), 'Left')
 move()
-done()
+turtle.done()
