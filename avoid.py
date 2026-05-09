@@ -18,7 +18,7 @@ score = 0 #Add variable to store the score
 
 def inside(point):
     """Return True if point on screen."""
-    return -200 < point.x < 200 and -200 < point.y < 200
+    return -300 < point.x < 300 and -200 < point.y < 200
 
 
 def draw(alive):
@@ -57,9 +57,9 @@ def move():
         if speed == south:
             bomb = vector(offset, 199)
         if speed == east:
-            bomb = vector(-199, offset)
+            bomb = vector(-299, offset)
         if speed == west:
-            bomb = vector(199, offset)
+            bomb = vector(299, offset)
 
         bombs.append(bomb)
         speeds.append(speed)
@@ -83,7 +83,7 @@ def move():
     ontimer(move, 50)
 
 
-setup(420, 420, 370, 0)
+setup(620, 420, 370, 0)
 hideturtle()
 up()
 tracer(False)
