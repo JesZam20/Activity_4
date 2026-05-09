@@ -1,11 +1,4 @@
-"""Avoid, classic arcade game.
-
-Exercises
-
-1. Display the duration of the game.
-2. Vary the size of the bombs.
-3. Vary the speed of the bombs.
-"""
+#Avoid, classic arcade game.
 
 from random import *
 from turtle import *
@@ -20,6 +13,7 @@ player = vector(0, 0)
 aim = choice(options).copy()
 bombs = []
 speeds = []
+score = 0 #Add variable to store the score
 
 
 def inside(point):
@@ -30,6 +24,11 @@ def inside(point):
 def draw(alive):
     """Draw screen objects."""
     clear()
+
+    #Show score at the upper right corner
+    goto(80, 160) #Position of the text
+    write(f'Score: {score:.2f}', font=('Arial', 16, 'normal')) #Display the score
+
     goto(player.x, player.y)
     color = 'blue' if alive else 'red'
     dot(10, color)
@@ -41,6 +40,9 @@ def draw(alive):
 
 def move():
     """Update player and bomb positions."""
+    global score #Indicate that the global variable score is used
+    score += 0.05   #Update the score every frame
+
     player.move(aim)
 
     for bomb, speed in zip(bombs, speeds):
