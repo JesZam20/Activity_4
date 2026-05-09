@@ -15,9 +15,11 @@ bombs = []
 speeds = []
 score = 0  # Add variable to store the score
 
+
 def inside(point):
     """Return True if point on screen."""
     return -300 < point.x < 300 and -200 < point.y < 200
+
 
 def draw(alive):
     """Draw screen objects."""
@@ -35,6 +37,7 @@ def draw(alive):
         turtle.goto(bomb.x, bomb.y)
         turtle.dot(20, 'black')
     turtle.update()
+
 
 def move():
     """Update player and bomb positions."""
@@ -79,6 +82,7 @@ def move():
 
     draw(True)
     turtle.ontimer(move, 50)
+
 
 turtle.setup(620, 420, 370, 0)
 turtle.hideturtle()
